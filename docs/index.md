@@ -1,5 +1,7 @@
 <h1>Credential Theft Lab</h1>
 
+*Currently updating for PAN-OS 8.1*
+
 ## Background
 
 Phishing attacks to obtain valid corporate credentials are one of the common 
