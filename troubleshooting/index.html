@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>What's Been Done For You - Credential Theft Lab</title>
+  <title>Troubleshooting - Credential Theft Lab</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "What's Been Done For You";
-    var mkdocs_page_input_path = "priorconfiguration.md";
-    var mkdocs_page_url = "/priorconfiguration/";
+    var mkdocs_page_name = "Troubleshooting";
+    var mkdocs_page_input_path = "troubleshooting.md";
+    var mkdocs_page_url = "/troubleshooting/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -57,18 +57,9 @@
     <a class="" href="../gettingstarted/">Getting Started</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">What's Been Done For You</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#read-only-domain-controller">Read Only Domain Controller</a></li>
-    
-
-    <li class="toctree-l2"><a href="#gophish-on-kali-linux">GoPhish On Kali Linux</a></li>
-    
-
-    </ul>
+    <a class="" href="../priorconfiguration/">What's Been Done For You</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -81,9 +72,12 @@
     <a class="" href="../mfa/">Multi-Factor Authentication</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../troubleshooting/">Troubleshooting</a>
+    <a class="current" href="./">Troubleshooting</a>
+    <ul class="subnav">
+            
+    </ul>
 	    </li>
           
         </ul>
@@ -108,7 +102,7 @@
     
       
     
-    <li>What's Been Done For You</li>
+    <li>Troubleshooting</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -118,23 +112,36 @@
           <div role="main">
             <div class="section">
               
-                <h1>What's Been Done For You</h1>
+                <h1>Credential Phishing Troubleshooting Commands</h1>
 
-<p><strong>Note:</strong> This section is included for reference, and no action is needed on your part.</p>
-<h2 id="read-only-domain-controller">Read Only Domain Controller</h2>
-<p>User-ID Agent and User-ID Agent Credential service have already been installed on the RODC.  The 
-following screen capture shows that the <em>"Import from User-ID Credential Agent"</em> is selected under 
-the Credentials tab in the User-ID Agent GUI.  This enables the User-ID agent to import the bloom
-filter that the User-ID credential agent creates to represent users and the corresponding password 
-hashes.</p>
-<p><img alt="User-ID Agent Config" src="../img/uid_agent_config.png" /></p>
-<p>Users that should receive credential submission enforcement have been added to the "Allowed RODC 
-Password Replication Group".</p>
-<p><img alt="Allowed RODC Users" src="../img/allowed_rodc_users.png" /></p>
-<h2 id="gophish-on-kali-linux">GoPhish On Kali Linux</h2>
-<p>The <a href="https://getgophish.com">GoPhish</a> tool has been set up on the Kali Linux instance to simulate 
-a phishing campaign.  Our campaign will use a fake Palo Alto Networks SSO landing page at 
-<strong>paloaito.sso.com</strong> to capture domain credentials from our test users. </p>
+<p>If you do not get the URL block page when entering a corporate username/password, troubleshoot using
+these commands.</p>
+<p>Note that all the screenshots below are from a test environment <em>that is operating properly.</em></p>
+<p>On the firewall GUI, under Device &gt; User Identification &gt; User-ID Agents, the agent should be 
+connected (green circle).</p>
+<p><strong>screenshot</strong></p>
+<p>On the firewall CLI, confirm the username appears in the output of this command: </p>
+<p><code>show user ip-user-mapping all</code></p>
+<p><strong>screenshot</strong></p>
+<p>On the firewall CLI, run this command: </p>
+<p><code>show user user-id-agent state all</code></p>
+<p>At the bottom of the output, examine the highlighted sections below, but mainly confirm that the 
+credential enforcement status is "in sync".</p>
+<p><strong>screenshot</strong></p>
+<p>On the firewall CLI, confirm that the bloom filter is being sent.</p>
+<p><code>show user credential-filter statistics</code></p>
+<p><strong>screenshot</strong></p>
+<p>On the RODC in Windows Powershell, confirm that the password is being replicated to the RODC.</p>
+<p><code>repadmin /rodcpwdrepl rodc dc1 “cn=user1,cn=Users,dc=acme,dc=com”</code></p>
+<p><strong>screenshot</strong></p>
+<p>View the last few log lines of each of these log files, and try to determine if there are issues:</p>
+<p><code>get-content “C:\Program Files\Palo Alto Networks\User-ID Credential Agent\UaCredDebug.log” –tail 15</code></p>
+<p><strong>screenshot</strong></p>
+<p><code>get-content “C:\Program Files (x86)\Palo Alto Networks\User-ID Agent\UaDebug.log” –tail 15</code></p>
+<p><strong>screenshot</strong></p>
+<p>Here is another firewall command, but it sometimes gives errors when things are working fine:</p>
+<p><code>tail mp-log useridd.log</code></p>
+<p><strong>screenshot</strong></p>
               
             </div>
           </div>
@@ -142,10 +149,8 @@ a phishing campaign.  Our campaign will use a fake Palo Alto Networks SSO landin
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../credentialphishing/" class="btn btn-neutral float-right" title="Credential Phishing Prevention">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../gettingstarted/" class="btn btn-neutral" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../mfa/" class="btn btn-neutral" title="Multi-Factor Authentication"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -171,10 +176,8 @@ a phishing campaign.  Our campaign will use a fake Palo Alto Networks SSO landin
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../gettingstarted/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../mfa/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../credentialphishing/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

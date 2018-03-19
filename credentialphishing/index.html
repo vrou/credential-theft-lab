@@ -67,6 +67,9 @@
     <a class="current" href="./">Credential Phishing Prevention</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#create-gmail-account">Create Gmail Account</a></li>
+    
+
     <li class="toctree-l2"><a href="#phishing-campaign-configuration">Phishing Campaign Configuration</a></li>
     
 
@@ -82,6 +85,11 @@
             <li class="toctree-l1">
 		
     <a class="" href="../mfa/">Multi-Factor Authentication</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshooting/">Troubleshooting</a>
 	    </li>
           
         </ul>
@@ -131,6 +139,13 @@ Credential Filter</strong> method.</p>
 <hr />
 <h1>Configuration Steps</h1>
 
+<h3 id="create-gmail-account">Create Gmail Account</h3>
+<p>You will be sending a phishing email both <strong>from</strong> and <strong>to</strong> a personal Gmail account.  If you
+already have one, you can use it, but we recommend that you create new accounts just for this lab
+exercise.</p>
+<p>To create a new account, go to <a href="https://accounts.google.com/SignUp">https://accounts.google.com/SignUp</a>.
+Note that it will ask you for your phone number, and it will text you to confirm it.</p>
+<p><img alt="Create Gmail Account" src="../img/credential_phishing/create_gmail_account.png" /></p>
 <h3 id="phishing-campaign-configuration">Phishing Campaign Configuration</h3>
 <p>From your laptop, open the GlobalProtect Agent and connect to the GP Portal running on the untrust 
 interface of your firewall.  If you don't have it installed, install it when prompted by the portal.<br />
@@ -139,21 +154,36 @@ Table 2.  Do <strong>not</strong> use the Administrator account to connect, beca
 replicating its passwords to the RODC, and the phishing protection will not work.</p>
 <p>Once connected to your lab network via GP, access your phishing campaign admin site by connecting 
 to <a href="https://10.0.2.10">https://10.0.2.10</a> in a browser with the credentials <strong>admin/gophish</strong>.</p>
-<p><img alt="Phishing Campaign 1" src="../img/phishing_campaign_1.png" /></p>
+<p><img alt="Phishing Campaign 1" src="../img/credential_phishing/phishing_campaign_1.png" /></p>
 <p>In the <strong>Users &amp; Groups</strong> tab, edit the <strong>Phishing Recipients</strong> </p>
-<p><img alt="Phishing Campaign 2" src="../img/phishing_campaign_2.png" /></p>
+<p><img alt="Phishing Campaign 2" src="../img/credential_phishing/phishing_campaign_2.png" /></p>
 <p>Change the recipient to be your test email account.</p>
-<p><img alt="Phishing Campaign 3" src="../img/phishing_campaign_3.png" /></p>
+<p><img alt="Phishing Campaign 3" src="../img/credential_phishing/phishing_campaign_3.png" /></p>
+<p>In the <strong>Sending Profiles</strong> tab, edit the existing profile.  Change the 3 fields highlighted below
+to your Gmail account information.  <em>Note: you need to send the email from your Gmail account in
+order for the outbound email to work.</em></p>
+<p><img alt="Phishing Campaign 4" src="../img/credential_phishing/phishing_campaign_4.png" /></p>
+<p>At the bottom of that screen, click <strong>Save Profile</strong>.</p>
+<p>Edit the sending profile again.  At the bottom, click <strong>Send Test Email</strong>.</p>
+<p><img alt="Phishing Campaign 5" src="../img/credential_phishing/phishing_campaign_5.png" /></p>
+<p>Enter your email address and click send.  This will generate an email from Google to your Gmail
+account.  In GoPhish, you will get this error:</p>
+<p><img alt="Phishing Campaign 6" src="../img/credential_phishing/phishing_campaign_6.png" /></p>
+<p>To fix this, log in to your Gmail account and follow the instructions to "allow access to less
+secure apps":</p>
+<p><img alt="Phishing Campaign 7" src="../img/credential_phishing/phishing_campaign_7.png" /></p>
+<p>Once you enable access to less secure apps, back in GoPhish, try to send another test email.  It
+should succeed this time.  <strong>Do not proceed until you are able to successfully send a test email.</strong></p>
 <p>Now, in the <strong>Campaigns</strong> tab, click the <strong>New Campaign</strong> button.</p>
-<p><img alt="Phishing Campaign 4" src="../img/phishing_campaign_4.png" /></p>
+<p><img alt="Phishing Campaign 8" src="../img/credential_phishing/phishing_campaign_8.png" /></p>
 <p>Fill out the campaign as shown, then click <strong>Launch Campaign</strong>.  Pay particular attention to the 
 misspelled domain name <strong>paloaito.sso.com</strong> that we are spoofing!</p>
-<p><img alt="Phishing Campaign 5" src="../img/phishing_campaign_5.png" /></p>
+<p><img alt="Phishing Campaign 9" src="../img/credential_phishing/phishing_campaign_9.png" /></p>
 <p>GoPhish will queue and send the emails.  You can refresh this page and check that an email has been
 sent to your test user.</p>
-<p><img alt="Phishing Campaign 6" src="../img/phishing_campaign_6.png" /></p>
+<p><img alt="Phishing Campaign 10" src="../img/credential_phishing/phishing_campaign_10.png" /></p>
 <p>If you want, log into your test email account, and verify that you've received your phishing email.</p>
-<p><img alt="Phishing Campaign 7" src="../img/phishing_campaign_7.png" /></p>
+<p><img alt="Phishing Campaign 11" src="../img/credential_phishing/phishing_campaign_11.png" /></p>
 <hr />
 <h3 id="firewall-configuration">Firewall Configuration</h3>
 <p>Log in to the GUI of your firewall via the public management IP, and add a User-ID agent.</p>
@@ -163,7 +193,7 @@ sent to your test user.</p>
 <li><strong>Port:</strong> 5007</li>
 <li>Make sure the <strong>Enabled</strong> check box is ticked.</li>
 </ul>
-<p><img alt="User-ID Agent" src="../img/uid_agent.png" /></p>
+<p><img alt="User-ID Agent" src="../img/credential_phishing/firewall_config_uid_agent_1.png" /></p>
 <p><strong>Note:</strong> The service route configuration of the firewall has already been modified to communicate
 with the User-ID agent via the firewall's trust interface.  To confirm it has been set up correctly,
 under <strong>Device &gt; Setup &gt; Services</strong>, select <strong>Service Route Configuration</strong> and choose 
@@ -171,20 +201,20 @@ under <strong>Device &gt; Setup &gt; Services</strong>, select <strong>Service R
 the <em>trust</em> zone (ethernet1/2).</p>
 <p>Commit your changes.  After the commit completes, go back to the User-ID Agents tab.  The connected
 column will change from orange to green.</p>
-<p><img alt="User-ID Agent 2" src="../img/uid_agent_2.png" /></p>
+<p><img alt="User-ID Agent 2" src="../img/credential_phishing/firewall_config_uid_agent_2.png" /></p>
 <p><em>If the connected column doesn't change to green, you may need to manually restart the service.
 Connect to the RODC over RDP using the Administrator account, and make sure the User-ID Agent 
 service is started in <strong>Start &gt; Administrative Tools &gt; Services</strong>.</em></p>
 <p>To make sure our test URL is categorized the way we want it, create a custom URL category for the 
 URL <strong>paloaito.sso.com</strong>.  <em>(Note the misspelling!)</em></p>
-<p><img alt="Custom URL Category" src="../img/custom_category.png" /></p>
+<p><img alt="Custom URL Category" src="../img/credential_phishing/firewall_config_custom_category.png" /></p>
 <p>Select <strong>Objects &gt; Security Profiles &gt; URL Filtering</strong> and select the default URL Filtering profile.
 Clone it, and change the cloned profile name to "credential-phish-block".  Use the Categories tab 
 to set all URL categories to alert, but to block credential submissions.  </p>
-<p><img alt="Credential Phish Profile 1" src="../img/credential_phish_profile_1.png" /></p>
+<p><img alt="Credential Phish Profile 1" src="../img/credential_phishing/firewall_config_credential_phish_profile_1.png" /></p>
 <p>Now go to the <strong>User Credential Detection</strong> tab.  Choose <strong>Use Domain Credential Filter</strong> for the 
 User Credential Detection method, and set the log severity to "high".</p>
-<p><img alt="Credential Phish Profile 2" src="../img/credential_phish_profile_2.png" /></p>
+<p><img alt="Credential Phish Profile 2" src="../img/credential_phishing/firewall_config_credential_phish_profile_2.png" /></p>
 <p>Go to the <strong>Policies &gt; Security</strong> tab, and create a new security policy.  Associate your new URL
 filtering profile to the security policy with traffic from the GP zone to the PHISH zone.</p>
 <ul>
@@ -196,7 +226,7 @@ filtering profile to the security policy with traffic from the GP zone to the PH
 <li><strong>Action:</strong> allow</li>
 <li><strong>URL Profile:</strong> credential-phish-block</li>
 </ul>
-<p><img alt="Credential Phish Security Policy" src="../img/credential_phish_sec_policy.png" /></p>
+<p><img alt="Credential Phish Security Policy" src="../img/credential_phishing/firewall_config_credential_phish_sec_policy.png" /></p>
 <p>Commit the configuration.</p>
 <hr />
 <h3 id="verification">Verification</h3>
@@ -205,21 +235,21 @@ email contains a link that will open a phishing webpage mimicking the Palo Alto 
 SSO page.</p>
 <p>Upon clicking the link provided in the email, you will get a phishing page with a form to submit
 user credentials.</p>
-<p><img alt="Credential Theft Test 1" src="../img/credential_phish_test_1.png" /></p>
+<p><img alt="Credential Theft Test 1" src="../img/credential_phishing/credential_phish_test_1.png" /></p>
 <p><strong>Note:</strong> If you are NOT connected via GlobalProtect to your lab environment, you will get an 
 "under construction" web page.  You may have also mistyped the phishing URL in the GoPhish campaign 
 config.  Do not proceed until you get the test phishing page as shown.</p>
 <p>Enter a username <strong>not</strong> in Table 2, and any password you'd like.  Click <strong>Login</strong>.</p>
-<p><img alt="Credential Theft Test 2" src="../img/credential_phish_test_2.png" /></p>
+<p><img alt="Credential Theft Test 2" src="../img/credential_phishing/credential_phish_test_2.png" /></p>
 <p>At this point, those credentials have been phished.  You will be redirected to a legitimate site.</p>
-<p><img alt="Credential Theft Test 3" src="../img/credential_phish_test_3.png" /></p>
+<p><img alt="Credential Theft Test 3" src="../img/credential_phishing/credential_phish_test_3.png" /></p>
 <p>Now log in to your credential phishing campaign's admin web site.</p>
-<p><img alt="Credential Theft Test 4" src="../img/credential_phish_test_4.png" /></p>
+<p><img alt="Credential Theft Test 4" src="../img/credential_phishing/credential_phish_test_4.png" /></p>
 <p>Next to the PANW campaign, click the View Results icon in the bottom right corner to get the 
 campaign details.  Scroll down to your username, click the triangle icon, and expand the details:</p>
 <p>Scroll down to the bottom "Submitted Data" section, and click the triangle icon next to "View 
 Details".  You will see the username and password you entered.</p>
-<p><img alt="Credential Theft Test 5" src="../img/credential_phish_test_5.png" /></p>
+<p><img alt="Credential Theft Test 5" src="../img/credential_phishing/credential_phish_test_5.png" /></p>
 <p>The above steps you performed show how easy it is to steal user credentials.  Credential phishing
 is rampant.  It is easier than ever to phish a user for credentials.  This is especially true in
 targeted attacks, where the attacker wants to get into a specific organization.  A phishing attack
@@ -227,20 +257,20 @@ makes password complexity irrelevant; the attacker steals the password no matter
 is.</p>
 <p>You will do a second test, but first, let's find out what usernames are defined on your firewall.
 Connect to your firewall via SSH, and run the <code>show user ip-user-mapping all</code> command.</p>
-<p><img alt="Credential Theft Test 6" src="../img/credential_phish_test_6.png" /></p>
+<p><img alt="Credential Theft Test 6" src="../img/credential_phishing/credential_phish_test_6.png" /></p>
 <p>Confirm that your username is listed (it will be if you are connected to the lab environment via 
 GlobalProtect).  <em>Again, you should <strong>not</strong> be using the Administrator account to connect as.</em>  You 
 may see additional IP/user mappings.</p>
 <p>Go back to your test phishing account, and open the phishing email.  By clicking the link provided
 in the email, you will get to the phishing page again.</p>
-<p><img alt="Credential Theft Test 7" src="../img/credential_phish_test_7.png" /></p>
+<p><img alt="Credential Theft Test 7" src="../img/credential_phishing/credential_phish_test_7.png" /></p>
 <p>Try submitting true "corporate" credentials by submitting the credentials you are connected to 
 GlobalProtect with.</p>
 <p>Since the source IP address of a session had a known User-ID, and the HTTP POST parameter in that
 session matched the password belonging to that User-ID, the firewall detected a credential 
 submission and the URL will be blocked.</p>
 <p>You will get this message:</p>
-<p><img alt="Credential Theft Test 8" src="../img/credential_phish_test_8.png" /></p>
+<p><img alt="Credential Theft Test 8" src="../img/credential_phishing/credential_phish_test_8.png" /></p>
 <p>You can see more info about this process using these commands:</p>
 <ul>
 <li><code>show user user-id-agent state all</code></li>
@@ -248,10 +278,10 @@ submission and the URL will be blocked.</p>
   credential related logs, as well as bloom filter updates.</li>
 </ul>
 <p>In the output of <code>show user user-id-agent state all</code>, look for the following:</p>
-<p><img alt="Credential Theft Test 9" src="../img/credential_phish_test_9.png" /></p>
+<p><img alt="Credential Theft Test 9" src="../img/credential_phishing/credential_phish_test_9.png" /></p>
 <p>Now examine the firewall's URL filtering logs.  Locate the log that matches your username with the
 action <strong>block-url</strong>, and view the log details.  Look for the <strong>credential detected</strong> flag.</p>
-<p><img alt="Credential Theft Test 10" src="../img/credential_phish_test_10.png" /></p>
+<p><img alt="Credential Theft Test 10" src="../img/credential_phishing/credential_phish_test_10.png" /></p>
 <p>You can close the browser tabs to Gmail and Gophish.  You're done with this section of the lab.</p>
               
             </div>
