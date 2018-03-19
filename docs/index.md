@@ -1,7 +1,5 @@
 <h1>Credential Theft Lab</h1>
 
-*Currently updating for PAN-OS 8.1*
-
 ## Background
 
 Phishing attacks to obtain valid corporate credentials are one of the common 
@@ -24,8 +22,6 @@ The MFA factors that the firewall supports include Push, Short Message Service (
 ![Authentication Policy](img/authentication_policy.png)
 
 In the example depicted above, when a user on workstation "W10" tries to access the internal corporate Git repository, via either HTTP, HTTPS or SSH, the Next-Generation Firewall will block the traffic until a Multi-Factor authentication is performed by the user. When the request is fulfilled through a browser, the Authentication Policy will redirect the user to a Portal where he or she will provide login and password (First Factor) and, if successful, the Firewall will invoke third party vendors APIs to complete the second (and optionally third, fourth, etc.) factor(s) authentication. If the connection is not browser-based (i.e. a SSH session), it will be blocked by NGFW: the user must login (and perform MFA) to the Authentication Portal first. if the user has the GlobalProtect Client installed on the workstation, a pop-up message will automatically display a notification and provide a link to the Authentication Portal.
-
----
 
 ## Lab Diagram
 
@@ -58,3 +54,12 @@ Administrator | paloalto | *For lab maintenance only, use user accounts for test
 user1         | paloalto |
 user2         | paloalto |
 user3         | paloalto |
+
+## Controlling AWS Costs
+
+In addition to building the lab environment, the CloudFormation template also creates a Lambda
+function triggered by a CloudWatch Event Rule to automatically power off the instances at 05:00 GMT
+each day.
+
+To change this behavior, change the tag **credential-theft-lab:autopoweroff** to false on the
+instances you do not want shut down.
