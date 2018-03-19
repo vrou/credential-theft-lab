@@ -16,6 +16,17 @@ Credential Filter** method.
 
 <h1>Configuration Steps</h1>
 
+### Create Gmail Account
+
+You will be sending a phishing email both **from** and **to** a personal Gmail account.  If you
+already have one, you can use it, but we recommend that you create new accounts just for this lab
+exercise.
+
+To create a new account, go to [https://accounts.google.com/SignUp](https://accounts.google.com/SignUp).
+Note that it will ask you for your phone number, and it will text you to confirm it.
+
+**screenshot**
+
 ### Phishing Campaign Configuration
 
 From your laptop, open the GlobalProtect Agent and connect to the GP Portal running on the untrust 
@@ -36,6 +47,31 @@ In the **Users & Groups** tab, edit the **Phishing Recipients**
 Change the recipient to be your test email account.
 
 ![Phishing Campaign 3](img/phishing_campaign_3.png)
+
+In the **Sending Profiles** tab, edit the existing profile.  Change the 3 fields highlighted below
+to your Gmail account information.  *Note: you need to send the email from your Gmail account in
+order for the outbound email to work.*
+
+**screenshot**
+
+At the bottom of that screen, click **Save Profile**.
+
+Edit the sending profile again.  At the bottom, click **Send Test Email**.
+
+**screenshot**
+
+Enter your email address and click send.  This will generate an email from Google to your Gmail
+account.  In GoPhish, you will get this error:
+
+**screenshot**
+
+To fix this, log in to your Gmail account and follow the instructions to "allow access to less
+secure apps":
+
+**screenshot**
+
+Once you enable access to less secure apps, back in GoPhish, try to send another test email.  It
+should succeed this time.  **Do not proceed until you are able to successfully send a test email.**
 
 Now, in the **Campaigns** tab, click the **New Campaign** button.
 
