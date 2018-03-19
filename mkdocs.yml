@@ -5,4 +5,5 @@ pages:
   - What's Been Done For You: 'priorconfiguration.md'
   - Credential Phishing Prevention: 'credentialphishing.md'
   - Multi-Factor Authentication: 'mfa.md'
+  - Troubleshooting: 'troubleshooting.md'
 theme: readthedocs
