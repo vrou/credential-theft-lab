@@ -97,8 +97,3 @@ tab, and replace the external gateway IP address with your firewall's untrust in
 
 If you don't have GlobalProtect installed on your laptop, download and activate the latest version 
 on the firewall so you can download it when connecting to the GlobalProtect portal.
-
-## Create Phishing Victim Account
-
-We will be sending a phishing email as part of this lab.  You can either use a personal Gmail 
-account, or you can create a new one for this lab if you wish.
