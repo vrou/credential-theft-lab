@@ -69,6 +69,9 @@
     <li class="toctree-l2"><a href="#access-details">Access Details</a></li>
     
 
+    <li class="toctree-l2"><a href="#controlling-aws-costs">Controlling AWS Costs</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -126,7 +129,6 @@
               
                 <h1>Credential Theft Lab</h1>
 
-<p><em>Currently updating for PAN-OS 8.1</em></p>
 <h2 id="background">Background</h2>
 <p>Phishing attacks to obtain valid corporate credentials are one of the common 
 factors in many breaches today.  If the attacker can obtain valid credentials,
@@ -141,7 +143,6 @@ Credential phishing prevention works by scanning username and password submissio
 The MFA factors that the firewall supports include Push, Short Message Service (SMS), Voice, and One-time password (OTP) authentication. The firewall integrates with MFA vendors through APIs — The supported vendors are currently Duo, Okta, PingID and RSA.</p>
 <p><img alt="Authentication Policy" src="./img/authentication_policy.png" /></p>
 <p>In the example depicted above, when a user on workstation "W10" tries to access the internal corporate Git repository, via either HTTP, HTTPS or SSH, the Next-Generation Firewall will block the traffic until a Multi-Factor authentication is performed by the user. When the request is fulfilled through a browser, the Authentication Policy will redirect the user to a Portal where he or she will provide login and password (First Factor) and, if successful, the Firewall will invoke third party vendors APIs to complete the second (and optionally third, fourth, etc.) factor(s) authentication. If the connection is not browser-based (i.e. a SSH session), it will be blocked by NGFW: the user must login (and perform MFA) to the Authentication Portal first. if the user has the GlobalProtect Client installed on the workstation, a pop-up message will automatically display a notification and provide a link to the Authentication Portal.</p>
-<hr />
 <h2 id="lab-diagram">Lab Diagram</h2>
 <p>You will instantiate an AWS CloudFormation template that builds the below
 environment.  It will create the VPC, subnets, security groups, and instances
@@ -224,6 +225,12 @@ shown.  You will then connect into the environment using the GlobalProtect clien
 </tr>
 </tbody>
 </table>
+<h2 id="controlling-aws-costs">Controlling AWS Costs</h2>
+<p>In addition to building the lab environment, the CloudFormation template also creates a Lambda
+function triggered by a CloudWatch Event Rule to automatically power off the instances at 05:00 GMT
+each day.</p>
+<p>To change this behavior, change the tag <strong>credential-theft-lab:autopoweroff</strong> to false on the
+instances you do not want shut down.</p>
               
             </div>
           </div>
@@ -273,5 +280,5 @@ shown.  You will then connect into the environment using the GlobalProtect clien
 
 <!--
 MkDocs version : 0.17.1
-Build Date UTC : 2018-02-23 16:12:58
+Build Date UTC : 2018-03-19 18:19:51
 -->
