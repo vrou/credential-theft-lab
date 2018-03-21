@@ -37,13 +37,13 @@ You will need this information throughout the lab.
 
 ***Table 1* - Lab Instances**
 
-Device	                    | IP	                  | Username      | Password
---------------------------- | ----------------------- | ------------- | ---------
-Firewall                    | *Set by CloudFormation* | admin         | *Set by user*  
-Domain Controller           | 10.0.1.10               | Administrator | paloalto
-Read Only Domain Controller | 10.0.1.11               | Administrator | paloalto
-Web Server                  | 10.0.1.12               | Administrator | paloalto
-Phishing Site (Kali Linux)  | 10.0.2.10               | kali          | paloalto
+Device	                     | IP	                   | Username      | Password
+---------------------------- | ----------------------- | ------------- | ---------
+Firewall                     | *Set by CloudFormation* | admin         | *Set by user*
+Domain Controller            | 10.0.1.10               | Administrator | paloalto
+Read Only Domain Controller  | 10.0.1.11               | Administrator | paloalto
+Web Server                   | 10.0.1.12               | Administrator | paloalto
+Phishing Site (Ubuntu Linux) | 10.0.2.10               | ubuntu        | paloalto
 
 
 ***Table 2* - Corporate Active Directory Accounts - Credlab.local**
