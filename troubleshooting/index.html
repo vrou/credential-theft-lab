@@ -119,29 +119,29 @@ these commands.</p>
 <p>Note that all the screenshots below are from a test environment <em>that is operating properly.</em></p>
 <p>On the firewall GUI, under Device &gt; User Identification &gt; User-ID Agents, the agent should be 
 connected (green circle).</p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 1" src="../img/troubleshooting/troubleshooting_1.png" /></p>
 <p>On the firewall CLI, confirm the username appears in the output of this command: </p>
 <p><code>show user ip-user-mapping all</code></p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 2" src="../img/troubleshooting/troubleshooting_2.png" /></p>
 <p>On the firewall CLI, run this command: </p>
 <p><code>show user user-id-agent state all</code></p>
 <p>At the bottom of the output, examine the highlighted sections below, but mainly confirm that the 
 credential enforcement status is "in sync".</p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 3" src="../img/troubleshooting/troubleshooting_3.png" /></p>
 <p>On the firewall CLI, confirm that the bloom filter is being sent.</p>
 <p><code>show user credential-filter statistics</code></p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 4" src="../img/troubleshooting/troubleshooting_4.png" /></p>
 <p>On the RODC in Windows Powershell, confirm that the password is being replicated to the RODC.</p>
 <p><code>repadmin /rodcpwdrepl rodc dc1 “cn=user1,cn=Users,dc=acme,dc=com”</code></p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 5" src="../img/troubleshooting/troubleshooting_5.png" /></p>
 <p>View the last few log lines of each of these log files, and try to determine if there are issues:</p>
 <p><code>get-content “C:\Program Files\Palo Alto Networks\User-ID Credential Agent\UaCredDebug.log” –tail 15</code></p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 6" src="../img/troubleshooting/troubleshooting_6.png" /></p>
 <p><code>get-content “C:\Program Files (x86)\Palo Alto Networks\User-ID Agent\UaDebug.log” –tail 15</code></p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 7" src="../img/troubleshooting/troubleshooting_7.png" /></p>
 <p>Here is another firewall command, but it sometimes gives errors when things are working fine:</p>
 <p><code>tail mp-log useridd.log</code></p>
-<p><strong>screenshot</strong></p>
+<p><img alt="Screenshot 8" src="../img/troubleshooting/troubleshooting_8.png" /></p>
               
             </div>
           </div>
