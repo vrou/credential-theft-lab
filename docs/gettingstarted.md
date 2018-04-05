@@ -2,7 +2,7 @@
 
 ## Region Selection
 
-**For the moment, the template supports the US-East-1 region only.**
+**For the moment, the template supports the US-East-1 (N. Virginia) region only.**
 
 ## EC2 Key Pair Creation
 
