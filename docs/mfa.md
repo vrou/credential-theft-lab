@@ -71,7 +71,8 @@ Captive Portal is used to deliver the MFA prompt, so that needs to be configured
 should be a self-signed certificate for the portal already created (CP-MFA), as well as a SSL/TLS
 profile (CP_MFA_SSL) for you to use.
 
-Configure Captive Portal for the GP tunnel interface as shown:
+Configure Captive Portal for the GP tunnel interface as shown at
+**Device > User Identification > Captive Portal Settings**:
 
 ![Captive Portal](img/captive_portal.png)
 
@@ -81,7 +82,7 @@ click on the **App** tab and include the following settings:
 
   - **Enable Inbound Authentication Prompts from MFA Gateways**: Yes
   - **Network Port for Inbound Authentication Prompts (UDP)**: 4501
-  - **Trusted MFA Gateways**: 172.16.10.1
+  - **Trusted MFA Gateways**: 172.16.10.1 *(tunnel interface for our GP zone)*
 
 ![GP MFA](img/gp_mfa.png)
 
