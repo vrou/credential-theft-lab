@@ -67,13 +67,13 @@
     <a class="current" href="./">Credential Phishing Prevention</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#firewall-configuration">Firewall Configuration</a></li>
+    
+
     <li class="toctree-l2"><a href="#create-gmail-account">Create Gmail Account</a></li>
     
 
     <li class="toctree-l2"><a href="#phishing-campaign-configuration">Phishing Campaign Configuration</a></li>
-    
-
-    <li class="toctree-l2"><a href="#firewall-configuration">Firewall Configuration</a></li>
     
 
     <li class="toctree-l2"><a href="#verification">Verification</a></li>
@@ -139,6 +139,51 @@ Credential Filter</strong> method.</p>
 <hr />
 <h1>Configuration Steps</h1>
 
+<h3 id="firewall-configuration">Firewall Configuration</h3>
+<p>Log in to the GUI of your firewall via the public management IP, and add a User-ID agent.</p>
+<ul>
+<li><strong>Name:</strong> RODC</li>
+<li><strong>Host:</strong> 10.0.1.11</li>
+<li><strong>Port:</strong> 5007</li>
+<li>Make sure the <strong>Enabled</strong> check box is ticked.</li>
+</ul>
+<p><img alt="User-ID Agent" src="../img/credential_phishing/firewall_config_uid_agent_1.png" /></p>
+<p><strong>Note:</strong> The service route configuration of the firewall has already been modified to communicate
+with the User-ID agent via the firewall's trust interface.  To confirm it has been set up correctly,
+under <strong>Device &gt; Setup &gt; Services</strong>, select <strong>Service Route Configuration</strong> and choose 
+<strong>Customize</strong>.  In the IPv4 tab, select UID Agent service and verify that it is the interface in 
+the <em>trust</em> zone (ethernet1/2).</p>
+<p>Commit your changes.  After the commit completes, go back to the User-ID Agents tab.  The connected
+column will change from orange to green.</p>
+<p><img alt="User-ID Agent 2" src="../img/credential_phishing/firewall_config_uid_agent_2.png" /></p>
+<p><em>If the connected column doesn't change to green, you may need to manually restart the service.
+Connect to the RODC over RDP using the Administrator account, and make sure the User-ID Agent 
+service is started in <strong>Start &gt; Administrative Tools &gt; Services</strong>.</em></p>
+<p>To make sure our test URL is categorized the way we want it, create a custom URL category for the 
+URL <strong>paloaito.sso.com</strong>.  <em>(Note the misspelling!)</em></p>
+<p><img alt="Custom URL Category" src="../img/credential_phishing/firewall_config_custom_category.png" /></p>
+<p>Select <strong>Objects &gt; Security Profiles &gt; URL Filtering</strong> and select the default URL Filtering profile.
+Clone it, and change the cloned profile name to "credential-phish-block".  Use the Categories tab 
+to set all URL categories to alert, but to block credential submissions.  </p>
+<p><img alt="Credential Phish Profile 1" src="../img/credential_phishing/firewall_config_credential_phish_profile_1.png" /></p>
+<p>Now go to the <strong>User Credential Detection</strong> tab.  Choose <strong>Use Domain Credential Filter</strong> for the 
+User Credential Detection method, and set the log severity to "high".</p>
+<p><img alt="Credential Phish Profile 2" src="../img/credential_phishing/firewall_config_credential_phish_profile_2.png" /></p>
+<p>Go to the <strong>Policies &gt; Security</strong> tab, and create a new security policy.  Associate your new URL
+filtering profile to the security policy with traffic from the GP zone to the PHISH zone.  Be sure
+to create it before the <strong>Outgoing Traffic</strong> rule.</p>
+<ul>
+<li><strong>Policy Name:</strong> Allow to Intranet</li>
+<li><strong>Source Zone:</strong> GP</li>
+<li><strong>Destination Zone:</strong> PHISH, TRUST</li>
+<li><strong>Application</strong>: any</li>
+<li><strong>Service:</strong> application-default</li>
+<li><strong>Action:</strong> allow</li>
+<li><strong>URL Profile:</strong> credential-phish-block</li>
+</ul>
+<p><img alt="Credential Phish Security Policy" src="../img/credential_phishing/firewall_config_credential_phish_sec_policy.png" /></p>
+<p>Commit the configuration.</p>
+<hr />
 <h3 id="create-gmail-account">Create Gmail Account</h3>
 <p>You will be sending a phishing email both <strong>from</strong> and <strong>to</strong> a personal Gmail account.  If you
 already have one, you can use it, but we recommend that you create new accounts just for this lab
@@ -146,6 +191,7 @@ exercise.</p>
 <p>To create a new account, go to <a href="https://accounts.google.com/SignUp">https://accounts.google.com/SignUp</a>.
 Note that it will ask you for your phone number, and it will text you to confirm it.</p>
 <p><img alt="Create Gmail Account" src="../img/credential_phishing/create_gmail_account.png" /></p>
+<hr />
 <h3 id="phishing-campaign-configuration">Phishing Campaign Configuration</h3>
 <p>From your laptop, open the GlobalProtect Agent and connect to the GP Portal running on the untrust 
 interface of your firewall.  If you don't have it installed, install it when prompted by the portal.<br />
@@ -184,50 +230,6 @@ sent to your test user.</p>
 <p><img alt="Phishing Campaign 10" src="../img/credential_phishing/phishing_campaign_10.png" /></p>
 <p>If you want, log into your test email account, and verify that you've received your phishing email.</p>
 <p><img alt="Phishing Campaign 11" src="../img/credential_phishing/phishing_campaign_11.png" /></p>
-<hr />
-<h3 id="firewall-configuration">Firewall Configuration</h3>
-<p>Log in to the GUI of your firewall via the public management IP, and add a User-ID agent.</p>
-<ul>
-<li><strong>Name:</strong> RODC</li>
-<li><strong>Host:</strong> 10.0.1.11</li>
-<li><strong>Port:</strong> 5007</li>
-<li>Make sure the <strong>Enabled</strong> check box is ticked.</li>
-</ul>
-<p><img alt="User-ID Agent" src="../img/credential_phishing/firewall_config_uid_agent_1.png" /></p>
-<p><strong>Note:</strong> The service route configuration of the firewall has already been modified to communicate
-with the User-ID agent via the firewall's trust interface.  To confirm it has been set up correctly,
-under <strong>Device &gt; Setup &gt; Services</strong>, select <strong>Service Route Configuration</strong> and choose 
-<strong>Customize</strong>.  In the IPv4 tab, select UID Agent service and verify that it is the interface in 
-the <em>trust</em> zone (ethernet1/2).</p>
-<p>Commit your changes.  After the commit completes, go back to the User-ID Agents tab.  The connected
-column will change from orange to green.</p>
-<p><img alt="User-ID Agent 2" src="../img/credential_phishing/firewall_config_uid_agent_2.png" /></p>
-<p><em>If the connected column doesn't change to green, you may need to manually restart the service.
-Connect to the RODC over RDP using the Administrator account, and make sure the User-ID Agent 
-service is started in <strong>Start &gt; Administrative Tools &gt; Services</strong>.</em></p>
-<p>To make sure our test URL is categorized the way we want it, create a custom URL category for the 
-URL <strong>paloaito.sso.com</strong>.  <em>(Note the misspelling!)</em></p>
-<p><img alt="Custom URL Category" src="../img/credential_phishing/firewall_config_custom_category.png" /></p>
-<p>Select <strong>Objects &gt; Security Profiles &gt; URL Filtering</strong> and select the default URL Filtering profile.
-Clone it, and change the cloned profile name to "credential-phish-block".  Use the Categories tab 
-to set all URL categories to alert, but to block credential submissions.  </p>
-<p><img alt="Credential Phish Profile 1" src="../img/credential_phishing/firewall_config_credential_phish_profile_1.png" /></p>
-<p>Now go to the <strong>User Credential Detection</strong> tab.  Choose <strong>Use Domain Credential Filter</strong> for the 
-User Credential Detection method, and set the log severity to "high".</p>
-<p><img alt="Credential Phish Profile 2" src="../img/credential_phishing/firewall_config_credential_phish_profile_2.png" /></p>
-<p>Go to the <strong>Policies &gt; Security</strong> tab, and create a new security policy.  Associate your new URL
-filtering profile to the security policy with traffic from the GP zone to the PHISH zone.</p>
-<ul>
-<li><strong>Policy Name:</strong> Allow to Intranet</li>
-<li><strong>Source Zone:</strong> GP</li>
-<li><strong>Destination Zone:</strong> PHISH, TRUST</li>
-<li><strong>Application</strong>: any</li>
-<li><strong>Service:</strong> application-default</li>
-<li><strong>Action:</strong> allow</li>
-<li><strong>URL Profile:</strong> credential-phish-block</li>
-</ul>
-<p><img alt="Credential Phish Security Policy" src="../img/credential_phishing/firewall_config_credential_phish_sec_policy.png" /></p>
-<p>Commit the configuration.</p>
 <hr />
 <h3 id="verification">Verification</h3>
 <p>Log into your test email account.  You should see that a phishing email has been received.  The
@@ -271,11 +273,10 @@ session matched the password belonging to that User-ID, the firewall detected a 
 submission and the URL will be blocked.</p>
 <p>You will get this message:</p>
 <p><img alt="Credential Theft Test 8" src="../img/credential_phishing/credential_phish_test_8.png" /></p>
-<p>You can see more info about this process using these commands:</p>
+<p>If you do not get this message, see the <a href="../troubleshooting/">Troubleshooting</a> section.</p>
+<p>You can see more info about this process using this command:</p>
 <ul>
 <li><code>show user user-id-agent state all</code></li>
-<li><code>less mp-log useridd.log</code> - You can find detailed logs in useridd.log.  This log now includes 
-  credential related logs, as well as bloom filter updates.</li>
 </ul>
 <p>In the output of <code>show user user-id-agent state all</code>, look for the following:</p>
 <p><img alt="Credential Theft Test 9" src="../img/credential_phishing/credential_phish_test_9.png" /></p>

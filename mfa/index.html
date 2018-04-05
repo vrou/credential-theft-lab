@@ -169,7 +169,8 @@ SMS.</p>
 <p>Captive Portal is used to deliver the MFA prompt, so that needs to be configured next.  There
 should be a self-signed certificate for the portal already created (CP-MFA), as well as a SSL/TLS
 profile (CP_MFA_SSL) for you to use.</p>
-<p>Configure Captive Portal for the GP tunnel interface as shown:</p>
+<p>Configure Captive Portal for the GP tunnel interface as shown at
+<strong>Device &gt; User Identification &gt; Captive Portal Settings</strong>:</p>
 <p><img alt="Captive Portal" src="../img/captive_portal.png" /></p>
 <p>We want GlobalProtect to prompt us to authenticate for applications that aren't web based, so we
 need to add those settings.  In the Agent config section of the GlobalProtect portal configuration,
@@ -177,7 +178,7 @@ click on the <strong>App</strong> tab and include the following settings:</p>
 <ul>
 <li><strong>Enable Inbound Authentication Prompts from MFA Gateways</strong>: Yes</li>
 <li><strong>Network Port for Inbound Authentication Prompts (UDP)</strong>: 4501</li>
-<li><strong>Trusted MFA Gateways</strong>: 172.16.10.1</li>
+<li><strong>Trusted MFA Gateways</strong>: 172.16.10.1 <em>(tunnel interface for our GP zone)</em></li>
 </ul>
 <p><img alt="GP MFA" src="../img/gp_mfa.png" /></p>
 <p>In <strong>Objects &gt; Authentication</strong>, create a new authentication object using the authentication 
