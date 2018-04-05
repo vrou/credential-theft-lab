@@ -221,11 +221,11 @@ You will get this message:
 
 ![Credential Theft Test 8](img/credential_phishing/credential_phish_test_8.png)
 
-You can see more info about this process using these commands:
+If you do not get this message, see the [Troubleshooting](troubleshooting.md) section.
+
+You can see more info about this process using this command:
 
 * `show user user-id-agent state all`
-* `less mp-log useridd.log` - You can find detailed logs in useridd.log.  This log now includes 
-  credential related logs, as well as bloom filter updates.
 
 In the output of `show user user-id-agent state all`, look for the following:
 
