@@ -61,6 +61,10 @@ The created management security group for the firewall does not allow inbound ac
 In the AWS console, add HTTPS and SSH access from your IP to the 
 **Credential-Theft-Lab-FirewallManagementSecurityGroup**.
 
+*Note: Be sure to disconnect from any
+sort of VPN that you might be using that could alter the IP address that you are connecting from
+first.*
+
 ![Security Group 1](img/security_group_1.png)
 
 ![Security Group 2](img/security_group_2.png)
@@ -71,7 +75,13 @@ interface is wide open and should need no modifications.
 ## Log In To Firewall
 
 After giving the firewall instance around 5-10 minutes to initialize and bootstrap, use your SSH key 
-to log in as the admin user and set the admin password.
+to log in as the admin user and set the admin password.  This can be accomplished with the following
+commands:
+
+```
+configure
+set mgt-config users admin password
+```
 
 ## Generate GlobalProtect Portal Certificate
 
