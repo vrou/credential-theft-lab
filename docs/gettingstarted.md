@@ -103,6 +103,8 @@ tab, and replace the external gateway IP address with your firewall's untrust in
 
 ![External Gateway](img/external_gateway.png)
 
+Be sure to commit your changes when you're done.
+
 ## Download/Activate GlobalProtect Client
 
 If you don't have GlobalProtect installed on your laptop, download and activate the latest version 
