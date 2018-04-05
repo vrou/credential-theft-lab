@@ -16,6 +16,65 @@ Credential Filter** method.
 
 <h1>Configuration Steps</h1>
 
+### Firewall Configuration
+
+Log in to the GUI of your firewall via the public management IP, and add a User-ID agent.
+
+   - **Name:** RODC
+   - **Host:** 10.0.1.11
+   - **Port:** 5007
+   - Make sure the **Enabled** check box is ticked.
+
+![User-ID Agent](img/credential_phishing/firewall_config_uid_agent_1.png)
+
+**Note:** The service route configuration of the firewall has already been modified to communicate
+with the User-ID agent via the firewall's trust interface.  To confirm it has been set up correctly,
+under **Device > Setup > Services**, select **Service Route Configuration** and choose 
+**Customize**.  In the IPv4 tab, select UID Agent service and verify that it is the interface in 
+the *trust* zone (ethernet1/2).
+
+Commit your changes.  After the commit completes, go back to the User-ID Agents tab.  The connected
+column will change from orange to green.
+
+![User-ID Agent 2](img/credential_phishing/firewall_config_uid_agent_2.png)
+
+*If the connected column doesn't change to green, you may need to manually restart the service.
+Connect to the RODC over RDP using the Administrator account, and make sure the User-ID Agent 
+service is started in **Start > Administrative Tools > Services**.*
+
+To make sure our test URL is categorized the way we want it, create a custom URL category for the 
+URL **paloaito.sso.com**.  *(Note the misspelling!)*
+
+![Custom URL Category](img/credential_phishing/firewall_config_custom_category.png)
+
+Select **Objects > Security Profiles > URL Filtering** and select the default URL Filtering profile.
+Clone it, and change the cloned profile name to "credential-phish-block".  Use the Categories tab 
+to set all URL categories to alert, but to block credential submissions.  
+
+![Credential Phish Profile 1](img/credential_phishing/firewall_config_credential_phish_profile_1.png)
+
+Now go to the **User Credential Detection** tab.  Choose **Use Domain Credential Filter** for the 
+User Credential Detection method, and set the log severity to "high".
+
+![Credential Phish Profile 2](img/credential_phishing/firewall_config_credential_phish_profile_2.png)
+
+Go to the **Policies > Security** tab, and create a new security policy.  Associate your new URL
+filtering profile to the security policy with traffic from the GP zone to the PHISH zone.
+
+  - **Policy Name:** Allow to Intranet
+  - **Source Zone:** GP
+  - **Destination Zone:** PHISH, TRUST
+  - **Application**: any
+  - **Service:** application-default
+  - **Action:** allow
+  - **URL Profile:** credential-phish-block
+
+![Credential Phish Security Policy](img/credential_phishing/firewall_config_credential_phish_sec_policy.png)
+
+Commit the configuration.
+
+---
+
 ### Create Gmail Account
 
 You will be sending a phishing email both **from** and **to** a personal Gmail account.  If you
@@ -26,6 +85,8 @@ To create a new account, go to [https://accounts.google.com/SignUp](https://acco
 Note that it will ask you for your phone number, and it will text you to confirm it.
 
 ![Create Gmail Account](img/credential_phishing/create_gmail_account.png)
+
+---
 
 ### Phishing Campaign Configuration
 
@@ -90,65 +151,6 @@ sent to your test user.
 If you want, log into your test email account, and verify that you've received your phishing email.
 
 ![Phishing Campaign 11](img/credential_phishing/phishing_campaign_11.png)
-
----
-
-### Firewall Configuration
-
-Log in to the GUI of your firewall via the public management IP, and add a User-ID agent.
-
-   - **Name:** RODC
-   - **Host:** 10.0.1.11
-   - **Port:** 5007
-   - Make sure the **Enabled** check box is ticked.
-
-![User-ID Agent](img/credential_phishing/firewall_config_uid_agent_1.png)
-
-**Note:** The service route configuration of the firewall has already been modified to communicate
-with the User-ID agent via the firewall's trust interface.  To confirm it has been set up correctly,
-under **Device > Setup > Services**, select **Service Route Configuration** and choose 
-**Customize**.  In the IPv4 tab, select UID Agent service and verify that it is the interface in 
-the *trust* zone (ethernet1/2).
-
-Commit your changes.  After the commit completes, go back to the User-ID Agents tab.  The connected
-column will change from orange to green.
-
-![User-ID Agent 2](img/credential_phishing/firewall_config_uid_agent_2.png)
-
-*If the connected column doesn't change to green, you may need to manually restart the service.
-Connect to the RODC over RDP using the Administrator account, and make sure the User-ID Agent 
-service is started in **Start > Administrative Tools > Services**.*
-
-To make sure our test URL is categorized the way we want it, create a custom URL category for the 
-URL **paloaito.sso.com**.  *(Note the misspelling!)*
-
-![Custom URL Category](img/credential_phishing/firewall_config_custom_category.png)
-
-Select **Objects > Security Profiles > URL Filtering** and select the default URL Filtering profile.
-Clone it, and change the cloned profile name to "credential-phish-block".  Use the Categories tab 
-to set all URL categories to alert, but to block credential submissions.  
-
-![Credential Phish Profile 1](img/credential_phishing/firewall_config_credential_phish_profile_1.png)
-
-Now go to the **User Credential Detection** tab.  Choose **Use Domain Credential Filter** for the 
-User Credential Detection method, and set the log severity to "high".
-
-![Credential Phish Profile 2](img/credential_phishing/firewall_config_credential_phish_profile_2.png)
-
-Go to the **Policies > Security** tab, and create a new security policy.  Associate your new URL
-filtering profile to the security policy with traffic from the GP zone to the PHISH zone.
-
-  - **Policy Name:** Allow to Intranet
-  - **Source Zone:** GP
-  - **Destination Zone:** PHISH, TRUST
-  - **Application**: any
-  - **Service:** application-default
-  - **Action:** allow
-  - **URL Profile:** credential-phish-block
-
-![Credential Phish Security Policy](img/credential_phishing/firewall_config_credential_phish_sec_policy.png)
-
-Commit the configuration.
 
 ---
 
