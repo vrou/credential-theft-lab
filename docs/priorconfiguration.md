@@ -10,12 +10,12 @@ the Credentials tab in the User-ID Agent GUI.  This enables the User-ID agent to
 filter that the User-ID credential agent creates to represent users and the corresponding password 
 hashes.
 
-![User-ID Agent Config](img/uid_agent_config.png)
+![User-ID Agent Config](img/prior_configuration/uid_agent_config.png)
 
 Users that should receive credential submission enforcement have been added to the "Allowed RODC 
 Password Replication Group".
 
-![Allowed RODC Users](img/allowed_rodc_users.png)
+![Allowed RODC Users](img/prior_configuration/allowed_rodc_users.png)
 
 ## GoPhish On Kali Linux
 

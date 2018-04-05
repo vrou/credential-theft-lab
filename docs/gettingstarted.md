@@ -11,15 +11,15 @@ will be used for the initial login to EC2 instances.  If you've already got an
 SSH key pair that you would like to use in your desired region, feel free to 
 skip this step.
 
-![Key Pairs](img/key_pairs.png)
+![Key Pairs](img/getting_started/key_pairs.png)
 
 In the EC2 section of the AWS console, click **Key Pairs**.
 
-![Create Key Pair 1](img/create_key_pair_1.png)
+![Create Key Pair 1](img/getting_started/create_key_pair_1.png)
 
 Click **Create Key Pair**, give your key pair a name, and click **Create**.
 
-![Create Key Pair 2](img/create_key_pair_2.png)
+![Create Key Pair 2](img/getting_started/create_key_pair_2.png)
 
 A SSH public/private key pair will be created for you, and the private key 
 will be downloaded by the browser.  This key pair will be used to log into the firewall instance.  
@@ -38,14 +38,14 @@ CloudFormation will ask for a stack name.  You can call it whatever you want, bu
 guide assumes that it will be **Credential-Theft-Lab**.  Everything created by the template will 
 use the stack name as a prefix so you can easily identify them.
 
-![Stack Details](img/stack_details.png)
+![Stack Details](img/getting_started/stack_details.png)
 
 The two parameters for the stack are **BootstrapBucketName** and **KeyName**.  The bootstrap bucket 
 contains the initial configuration for the firewall (located ``here`` for reference), and the 
 KeyName dropdown should be used to select the SSH key pair you want to log into the firewall 
 initially.
 
-![Create Stack](img/create_stack.png)
+![Create Stack](img/getting_started/create_stack.png)
 
 Be sure to check the box "I acknowledge that AWS CloudFormation might create IAM resources" when 
 creating the stack to create the bootstrap user and role.
@@ -65,9 +65,9 @@ In the AWS console, add HTTPS and SSH access from your IP to the
 sort of VPN that you might be using that could alter the IP address that you are connecting from
 first.*
 
-![Security Group 1](img/security_group_1.png)
+![Security Group 1](img/getting_started/security_group_1.png)
 
-![Security Group 2](img/security_group_2.png)
+![Security Group 2](img/getting_started/security_group_2.png)
 
 The **Credential-Theft-Lab-PublicSecurityGroup**, which is associated to the firewall's untrust 
 interface is wide open and should need no modifications.
@@ -89,19 +89,19 @@ The bootstrap configuration for the firewall contains a certificate authority fo
 to create a certificate for the IP address of the firewall's untrust interface.  Go to **Device > 
 Certificate Management > Certificates** and create one similar to the following.
 
-![Replace Cert 1](img/generate_cert_1.png)
+![Replace Cert 1](img/getting_started/generate_cert_1.png)
 
 Go to **Device > Certificate Management > SSL/TLS Service Profile** and use the certificate you just
 created in place of **Placeholder-Cert** in the **GlobalProtect_SSL** service profile.
 
-![Replace Cert 2](img/generate_cert_2.png)
+![Replace Cert 2](img/getting_started/generate_cert_2.png)
 
 ## Replace External Gateway in GlobalProtect Portal Config
 
 In the Agent config section of the GlobalProtect portal configuration, navigate to the **External**
 tab, and replace the external gateway IP address with your firewall's untrust interface.
 
-![External Gateway](img/external_gateway.png)
+![External Gateway](img/getting_started/external_gateway.png)
 
 Be sure to commit your changes when you're done.
 

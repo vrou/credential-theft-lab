@@ -19,7 +19,7 @@ Credential phishing prevention works by scanning username and password submissio
 To protect services and applications from attackers, you can use the PAN-OS Authentication Policy to control access for end users. Authentication Policy provides the benefit of letting you to choose how many authentication challenges of different types (factors) users must respond to. Using multiple factors of authentication (MFA) is particularly useful for protecting your most sensitive services and applications. For example, you can force users to enter a login password and then enter a verification code that they receive by phone before accessing critical financial documents. To reduce the frequency of MFA challenges that interrupt the user workflow, you can specify an authentication timeout period during which a user responds to the challenges only once for repeated access to services and applications.
 The MFA factors that the firewall supports include Push, Short Message Service (SMS), Voice, and One-time password (OTP) authentication. The firewall integrates with MFA vendors through APIs — The supported vendors are currently Duo, Okta, PingID and RSA.
 
-![Authentication Policy](img/authentication_policy.png)
+![Authentication Policy](img/overview/authentication_policy.png)
 
 In the example depicted above, when a user on workstation "W10" tries to access the internal corporate Git repository, via either HTTP, HTTPS or SSH, the Next-Generation Firewall will block the traffic until a Multi-Factor authentication is performed by the user. When the request is fulfilled through a browser, the Authentication Policy will redirect the user to a Portal where he or she will provide login and password (First Factor) and, if successful, the Firewall will invoke third party vendors APIs to complete the second (and optionally third, fourth, etc.) factor(s) authentication. If the connection is not browser-based (i.e. a SSH session), it will be blocked by NGFW: the user must login (and perform MFA) to the Authentication Portal first. if the user has the GlobalProtect Client installed on the workstation, a pop-up message will automatically display a notification and provide a link to the Authentication Portal.
 
@@ -29,7 +29,7 @@ You will instantiate an AWS CloudFormation template that builds the below
 environment.  It will create the VPC, subnets, security groups, and instances
 shown.  You will then connect into the environment using the GlobalProtect client.
 
-![Lab Diagram](img/lab_diagram.png)
+![Lab Diagram](img/overview/lab_diagram.png)
 
 ## Access Details
 
