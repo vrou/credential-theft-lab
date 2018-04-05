@@ -59,7 +59,8 @@ User Credential Detection method, and set the log severity to "high".
 ![Credential Phish Profile 2](img/credential_phishing/firewall_config_credential_phish_profile_2.png)
 
 Go to the **Policies > Security** tab, and create a new security policy.  Associate your new URL
-filtering profile to the security policy with traffic from the GP zone to the PHISH zone.
+filtering profile to the security policy with traffic from the GP zone to the PHISH zone.  Be sure
+to create it before the **Outgoing Traffic** rule.
 
   - **Policy Name:** Allow to Intranet
   - **Source Zone:** GP
