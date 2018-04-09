@@ -132,7 +132,7 @@ credential enforcement status is "in sync".</p>
 <p><code>show user credential-filter statistics</code></p>
 <p><img alt="Screenshot 4" src="../img/troubleshooting/troubleshooting_4.png" /></p>
 <p>On the RODC in Windows Powershell, confirm that the password is being replicated to the RODC.</p>
-<p><code>repadmin /rodcpwdrepl rodc dc1 “cn=user1,cn=Users,dc=acme,dc=com”</code></p>
+<p><code>repadmin /rodcpwdrepl rodc dc1 “cn=user one,cn=Users,dc=acme,dc=com”</code></p>
 <p><img alt="Screenshot 5" src="../img/troubleshooting/troubleshooting_5.png" /></p>
 <p>View the last few log lines of each of these log files, and try to determine if there are issues:</p>
 <p><code>get-content “C:\Program Files\Palo Alto Networks\User-ID Credential Agent\UaCredDebug.log” –tail 15</code></p>
