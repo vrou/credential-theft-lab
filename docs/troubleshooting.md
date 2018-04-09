@@ -33,7 +33,7 @@ On the firewall CLI, confirm that the bloom filter is being sent.
 
 On the RODC in Windows Powershell, confirm that the password is being replicated to the RODC.
 
-`repadmin /rodcpwdrepl rodc dc1 “cn=user1,cn=Users,dc=acme,dc=com”`
+`repadmin /rodcpwdrepl rodc dc1 “cn=user one,cn=Users,dc=acme,dc=com”`
 
 ![Screenshot 5](img/troubleshooting/troubleshooting_5.png)
 
