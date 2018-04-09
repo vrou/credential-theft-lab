@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<config version="8.0.0" urldb="paloaltonetworks">
+<config urldb="paloaltonetworks" version="8.1.0">
   <mgt-config>
     <users>
       <entry name="admin">
-        <phash>$1$tdexplug$Rs.hsbIbribSrkSVa17wb0</phash>
+        <phash>$1$tpvjuilg$OnwtGpFRIYzkR6g7NZuDb.</phash>
         <permissions>
           <role-based>
             <superuser>yes</superuser>
@@ -928,6 +928,8 @@ XoX7yJAsl9fVxBI7vwdTgqDm0hPbIcdu18I7Ck8b7Z8/vgX2RzVFEjqWMKf7pe6O
                     <ip/>
                   </local-address>
                   <ssl-tls-service-profile>GlobalProtect_SSL</ssl-tls-service-profile>
+                  <custom-login-page>factory-default</custom-login-page>
+                  <custom-home-page>factory-default</custom-home-page>
                 </portal-config>
                 <client-config>
                   <root-ca>
@@ -1269,13 +1271,16 @@ XoX7yJAsl9fVxBI7vwdTgqDm0hPbIcdu18I7Ck8b7Z8/vgX2RzVFEjqWMKf7pe6O
               <user-name>
                 <member>sAMAccountName</member>
               </user-name>
-              <email>
-                <member>mail</member>
-              </email>
               <server-profile>DC1_LDAP</server-profile>
               <group-include-list>
                 <member>cn=domain users,cn=users,DC=credlab,DC=local</member>
               </group-include-list>
+              <user-email>
+                <member>mail</member>
+              </user-email>
+              <group-email>
+                <member>mail</member>
+              </group-email>
             </entry>
           </group-mapping>
           <profiles>
