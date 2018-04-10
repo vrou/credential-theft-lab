@@ -3,13 +3,13 @@
   <mgt-config>
     <users>
       <entry name="admin">
-        <phash>$1$tpvjuilg$OnwtGpFRIYzkR6g7NZuDb.</phash>
+        <phash>$1$nrtkuhqg$8lFAD0wdiI43S.RbiNDb0/</phash>
         <permissions>
           <role-based>
             <superuser>yes</superuser>
           </role-based>
         </permissions>
-        <public-key>c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDVURmN0pjVVhidUpDQTJwcnVSOWQ5M3BHSTR3YkgwMmxnVi9NdjhmTnZya1hjcDh2NHVneWkvZ0RoM1FCNnVhdE9veWJSWE01NXdnZ1VIY2l5Rm0xZytoMXFEeWhSMDU3SkkwNVBMb0FqY1o3NnA0bnNjV3NsUWZmRUVobFFIQ3dRazRyYzVjNXRvUkpCUmZvYldrenR2d2cxNDRCWmQyOFhlR3RKZkJIakNsVjVCUUIwUStJeC9qSUVza0crU1R1YjJKZkJFUkRnVE9UY2RFRnEvT1RRQWJWV29PV0xhZGd0MUZzbUlYbkRlZzFXR0xZV0p2OTh3Sk5BMzJxcVZ1K3V0UGJ1RnhHYi9zdzlmR2k1Y3ArNGRrdVZQMDVSZElGRTIvY1VqdkhzdVo2dUdBNk9SVDh1a1p0WFV5Y1plTXNkNnVyU2l3elpRR1hobjNTa05RN0IgbWlyaWNoYXJkc29uLWltYWMtYXdzCg==</public-key>
+        <public-key>c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDVURmN0pjVVhidUpDQTJwcnVSOWQ5M3BHSTR3YkgwMmxnVi9NdjhmTnZya1hjcDh2NHVneWkvZ0RoM1FCNnVhdE9veWJSWE01NXdnZ1VIY2l5Rm0xZytoMXFEeWhSMDU3SkkwNVBMb0FqY1o3NnA0bnNjV3NsUWZmRUVobFFIQ3dRazRyYzVjNXRvUkpCUmZvYldrenR2d2cxNDRCWmQyOFhlR3RKZkJIakNsVjVCUUIwUStJeC9qSUVza0crU1R1YjJKZkJFUkRnVE9UY2RFRnEvT1RRQWJWV29PV0xhZGd0MUZzbUlYbkRlZzFXR0xZV0p2OTh3Sk5BMzJxcVZ1K3V0UGJ1RnhHYi9zdzlmR2k1Y3ArNGRrdVZQMDVSZElGRTIvY1VqdkhzdVo2dUdBNk9SVDh1a1p0WFV5Y1plTXNkNnVyU2l3elpRR1hobjNTa05RN0IgbWlyaWNoYXJkc29uLWltYWMtYXdz</public-key>
       </entry>
     </users>
   </mgt-config>
@@ -717,7 +717,7 @@ XoX7yJAsl9fVxBI7vwdTgqDm0hPbIcdu18I7Ck8b7Z8/vgX2RzVFEjqWMKf7pe6O
           <management>
             <hostname-type-in-syslog>FQDN</hostname-type-in-syslog>
             <initcfg>
-              <public-key>c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDVURmN0pjVVhidUpDQTJwcnVSOWQ5M3BHSTR3YkgwMmxnVi9NdjhmTnZya1hjcDh2NHVneWkvZ0RoM1FCNnVhdE9veWJSWE01NXdnZ1VIY2l5Rm0xZytoMXFEeWhSMDU3SkkwNVBMb0FqY1o3NnA0bnNjV3NsUWZmRUVobFFIQ3dRazRyYzVjNXRvUkpCUmZvYldrenR2d2cxNDRCWmQyOFhlR3RKZkJIakNsVjVCUUIwUStJeC9qSUVza0crU1R1YjJKZkJFUkRnVE9UY2RFRnEvT1RRQWJWV29PV0xhZGd0MUZzbUlYbkRlZzFXR0xZV0p2OTh3Sk5BMzJxcVZ1K3V0UGJ1RnhHYi9zdzlmR2k1Y3ArNGRrdVZQMDVSZElGRTIvY1VqdkhzdVo2dUdBNk9SVDh1a1p0WFV5Y1plTXNkNnVyU2l3elpRR1hobjNTa05RN0IgbWlyaWNoYXJkc29uLWltYWMtYXdzCg==</public-key>
+              <public-key>c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDVURmN0pjVVhidUpDQTJwcnVSOWQ5M3BHSTR3YkgwMmxnVi9NdjhmTnZya1hjcDh2NHVneWkvZ0RoM1FCNnVhdE9veWJSWE01NXdnZ1VIY2l5Rm0xZytoMXFEeWhSMDU3SkkwNVBMb0FqY1o3NnA0bnNjV3NsUWZmRUVobFFIQ3dRazRyYzVjNXRvUkpCUmZvYldrenR2d2cxNDRCWmQyOFhlR3RKZkJIakNsVjVCUUIwUStJeC9qSUVza0crU1R1YjJKZkJFUkRnVE9UY2RFRnEvT1RRQWJWV29PV0xhZGd0MUZzbUlYbkRlZzFXR0xZV0p2OTh3Sk5BMzJxcVZ1K3V0UGJ1RnhHYi9zdzlmR2k1Y3ArNGRrdVZQMDVSZElGRTIvY1VqdkhzdVo2dUdBNk9SVDh1a1p0WFV5Y1plTXNkNnVyU2l3elpRR1hobjNTa05RN0IgbWlyaWNoYXJkc29uLWltYWMtYXdz</public-key>
               <type>
                 <dhcp-client>
                   <send-hostname>yes</send-hostname>
@@ -853,6 +853,7 @@ XoX7yJAsl9fVxBI7vwdTgqDm0hPbIcdu18I7Ck8b7Z8/vgX2RzVFEjqWMKf7pe6O
                     <member>any</member>
                   </category>
                   <application>
+                    <member>dns</member>
                     <member>ms-rdp</member>
                     <member>ping</member>
                     <member>ssh</member>
