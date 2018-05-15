@@ -30,7 +30,7 @@ For more information, see the [EC2 Key Pair documentation](https://docs.aws.amaz
 
 In CloudFormation, create a new stack using the following URL:
 
-``https://raw.githubusercontent.com/mrichardson03/credential-theft-lab/master/credential-theft-lab.json``
+``https://raw.githubusercontent.com/PaloAltoNetworks/credential-theft-lab/master/credential-theft-lab.json``
 
 This will always point to the latest version of the template.
 
